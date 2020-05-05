@@ -18,10 +18,9 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 
-public class MainActivity extends Activity {
+public class CopyMainActivity extends Activity {
 
 	// flag for Internet connection status
 	Boolean isInternetPresent = false;
@@ -62,7 +61,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.copy_activity_main);
 
 		cd = new ConnectionDetector(getApplicationContext());
 
@@ -70,7 +69,7 @@ public class MainActivity extends Activity {
 		isInternetPresent = cd.isConnectingToInternet();
 		if (!isInternetPresent) {
 			// Internet Connection is not present
-			alert.showAlertDialog(MainActivity.this, "Internet Connection Error",
+			alert.showAlertDialog(CopyMainActivity.this, "Internet Connection Error",
 					"Please connect to working Internet connection", false);
 			// stop executing code by return
 			return;
@@ -84,7 +83,7 @@ public class MainActivity extends Activity {
 			Log.d("Your Location", "latitude:" + gps.getLatitude() + ", longitude: " + gps.getLongitude());
 		} else {
 			// Can't get user's current location
-			alert.showAlertDialog(MainActivity.this, "GPS Status",
+			alert.showAlertDialog(CopyMainActivity.this, "GPS Status",
 					"Couldn't get location information. Please enable GPS",
 					false);
 			// stop executing code by return
@@ -156,7 +155,7 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(MainActivity.this);
+			pDialog = new ProgressDialog(CopyMainActivity.this);
 			pDialog.setMessage(Html.fromHtml("<b>Search</b><br/>Loading Places..."));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(false);
@@ -230,7 +229,7 @@ public class MainActivity extends Activity {
 								placesListItems.add(map);
 							}
 							// list adapter
-							ListAdapter adapter = new SimpleAdapter(MainActivity.this, placesListItems,
+							ListAdapter adapter = new SimpleAdapter(CopyMainActivity.this, placesListItems,
 					                R.layout.list_item,
 					                new String[] { KEY_REFERENCE, KEY_NAME,KEY_VICINITY}, new int[] {
 					                        R.id.reference, R.id.name,R.id.vicinity});
@@ -241,37 +240,37 @@ public class MainActivity extends Activity {
 					}
 					else if(status.equals("ZERO_RESULTS")){
 						// Zero results found
-						alert.showAlertDialog(MainActivity.this, "Near Places",
+						alert.showAlertDialog(CopyMainActivity.this, "Near Places",
 								"Sorry no places found. Try to change the types of places",
 								false);
 					}
 					else if(status.equals("UNKNOWN_ERROR"))
 					{
-						alert.showAlertDialog(MainActivity.this, "Places Error",
+						alert.showAlertDialog(CopyMainActivity.this, "Places Error",
 								"Sorry unknown error occured.",
 								false);
 					}
 					else if(status.equals("OVER_QUERY_LIMIT"))
 					{
-						alert.showAlertDialog(MainActivity.this, "Places Error",
+						alert.showAlertDialog(CopyMainActivity.this, "Places Error",
 								"Sorry query limit to google places is reached",
 								false);
 					}
 					else if(status.equals("REQUEST_DENIED"))
 					{
-						alert.showAlertDialog(MainActivity.this, "Places Error",
+						alert.showAlertDialog(CopyMainActivity.this, "Places Error",
 								"Sorry error occured. Request is denied",
 								false);
 					}
 					else if(status.equals("INVALID_REQUEST"))
 					{
-						alert.showAlertDialog(MainActivity.this, "Places Error",
+						alert.showAlertDialog(CopyMainActivity.this, "Places Error",
 								"Sorry error occured. Invalid Request",
 								false);
 					}
 					else
 					{
-						alert.showAlertDialog(MainActivity.this, "Places Error",
+						alert.showAlertDialog(CopyMainActivity.this, "Places Error",
 								"Sorry error occured.",
 								false);
 					}
